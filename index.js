@@ -46,7 +46,7 @@ function parseFile(entry, callback) {
   } else {
     var data = JSON.parse(entry);
 
-    callback && callback(purified);
+    callback && callback(data);
   }
 }
 
