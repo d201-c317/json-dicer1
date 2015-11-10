@@ -9,9 +9,10 @@ program
   .option('-e, --entries <n>', 'How Many Entries in a single file?', 10)
   .option('-p, --pretty', 'Pretty Formatted JSON in the outputs', false)
   .option('-m, --metadata', 'Generate Metadata', false)
-  .arguments('<cmd>')
-  .action(function (cmd) {
+  .arguments('<cmd> <outputDir>')
+  .action(function (cmd, outputDir) {
     cmdValue = cmd;
+    outputValue = outputDir;
   });
 
 program.parse(process.argv);
@@ -71,16 +72,16 @@ function writeFile(entry, callback) {
         out = jsonSrc.slice(first + 1, last);
       }
       if (program.pretty == true) {
-        fs.writeFile('./output/' + cnt + '.json', JSON.stringify(out, null, 2), 'utf8', null);
+        fs.writeFile('./' + outputValue + '/' + cnt + '.json', JSON.stringify(out, null, 2), 'utf8', null);
       } else {
-        fs.writeFile('./output/' + cnt + '.json', JSON.stringify(out), 'utf8', null);
+        fs.writeFile('./' + outputValue + '/' + cnt + '.json', JSON.stringify(out), 'utf8', null);
       }
     }
     out = jsonSrc.slice(first, jsonSrc.length);
     if (program.pretty == true) {
-      fs.writeFile('./output/' + cnt + '.json', JSON.stringify(out, null, 2), 'utf8', null);
+      fs.writeFile('./' + outputValue + '/' + cnt + '.json', JSON.stringify(out, null, 2), 'utf8', null);
     } else {
-      fs.writeFile('./output/' + cnt + '.json', JSON.stringify(out), 'utf8', null);
+      fs.writeFile('./' + outputValue + '/' + cnt + '.json', JSON.stringify(out), 'utf8', null);
     }
   }
   callback && callback(cnt);
@@ -99,7 +100,7 @@ readfile(function (result) {
         var metadata = {
           pages: callback
         };
-        fs.writeFile('./output/metadata.json', JSON.stringify(metadata, null, 2), 'utf8', null);
+        fs.writeFile('./' + outputValue + '/metadata.json', JSON.stringify(metadata, null, 2), 'utf8', null);
       }
     });
   });
