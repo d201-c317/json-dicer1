@@ -4,8 +4,7 @@
   "description": "A Simple Node.js Application to turn a big JSON array to lots of smaller ones.",
   "main": "index.js",
   "dependencies": {
-    "commander": "^2.9.0",
-    "underscore": "^1.8.3"
+    "commander": "^2.9.0"
   },
   "devDependencies": {},
   "scripts": {
